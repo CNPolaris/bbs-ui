@@ -9,6 +9,33 @@
       </div>
     </div>
     <div class="topicModule">
+      <div class="topic-box">
+        <div class="topicList">
+          <div v-for="item in list" :key="item.id" class="topicItem">
+            <div class="content clearfix">
+              <ul class="info">
+                <li>
+                  <span class="tag-container">{{ item.sectionId }}</span>
+                  <span class="postTime">发表时间：{{ item.createTime|formatDateTime }}</span>
+                </li>
+              </ul>
+              <h2 class="title clearfix">
+                <a target="_blank">{{ item.title }}</a>
+              </h2>
+            </div>
+            <div class="statistic clearfix">
+              <div class="viewTotal">
+                <i class="icon"></i>
+                {{ item.readCount }}
+              </div>
+              <div class="commentTotal">
+                <i class="icon"></i>
+                {{ item.replyCount }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: right" @pagination="getList" />
     </div>
     <div class="topic-formModule">
@@ -33,11 +60,21 @@
 <script>
 import Pagination from '@/components/Pagination'
 import MarkdownEditor from '@/components/MarkdownEditor'
-import { editTopic } from '@/api/topic'
+import { editTopic, getTopicList } from '@/api/topic'
+import { formatDate } from "@/utils"
 
 export default {
   name: 'Dashboard',
   components: { Pagination, MarkdownEditor },
+  filters: {
+    formatDateTime(time) {
+      if (time == null || time === '') {
+        return 'N/A'
+      }
+      const date = new Date(time)
+      return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
+    },
+  },
   data() {
     return {
       queryParam: {
@@ -46,7 +83,7 @@ export default {
         sectionId: 1
       },
       list: [],
-      total: 10,
+      total: 0,
       form: {
         sectionId: 1,
         title: null,
@@ -60,7 +97,10 @@ export default {
   },
   methods: {
     getList() {
-      console.log('获取话题列表')
+      getTopicList(this.queryParam).then(re => {
+        this.list = re.data.list
+        this.total = re.data.total
+      })
     },
     handleEdit() {
       editTopic(this.form).then(re => {

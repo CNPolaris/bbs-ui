@@ -6,7 +6,7 @@ const state = {
   token: getToken(),
   name: '',
   avatar: '',
-  introduction: '',
+  // introduction: '',
   roles: []
 }
 
@@ -14,9 +14,9 @@ const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
   },
-  SET_INTRODUCTION: (state, introduction) => {
-    state.introduction = introduction
-  },
+  // SET_INTRODUCTION: (state, introduction) => {
+  //   state.introduction = introduction
+  // },
   SET_NAME: (state, name) => {
     state.name = name
   },
@@ -54,17 +54,18 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { roles, name, avatar, introduction } = data
+        const { userName, avatar } = data
 
         // roles must be a non-empty array
-        if (!roles || roles.length <= 0) {
-          reject('getInfo: roles must be a non-null array!')
-        }
+        // if (!role || role.length <= 0) {
+        //   reject('getInfo: roles must be a non-null array!')
+        // }
 
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
+        // commit('SET_ROLES', role)
+        commit('SET_NAME', userName)
         commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
+
+        // commit('SET_INTRODUCTION', introduction)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -77,6 +78,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
+        commit('SET_AVATAR', '')
         commit('SET_ROLES', [])
         removeToken()
         resetRouter()

@@ -26,9 +26,17 @@
             </el-form-item>
           </el-form>
         </div>
-        <div class="head-user">
+        <div class="head-user" :hidden="isLogin">
           <a class="a-button">注册</a>
           <a href="/#/login" class="a-button">登录</a>
+        </div>
+        <div class="head-user" :hidden="!isLogin">
+          <el-dropdown trigger="click" placement="bottom">
+            <el-avatar class="el-dropdown-avatar" size="medium" :src="userInfo.avatar === null ? require('@/assets/avatar.png') : userInfo.avatar" />
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item divided @click.native="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </el-header>
     </div>
@@ -40,7 +48,7 @@
       </div>
     </el-footer>
     <div class="foot-copyright">
-      <span target="_blank" href="#">联系我们</span>
+      <span target="_blank" ref="#">联系我们</span>
     </div>
   </el-container>
 </template>
@@ -54,12 +62,25 @@ export default {
   data() {
     return {
       defaultUrl: '/',
-      keyWords: null
+      keyWords: null,
+      isLogin: false,
+      userInfo: {
+        avatar: null
+      }
     }
   },
   watch: {
     $route(to, from) {
       this.defaultUrl = this.routeSelect(to.path)
+    }
+  },
+  created() {
+    if( this.$store.getters.token !== ''){
+      this.$store.dispatch('user/getInfo').then(() => {
+        console.log('获取用户信息成功')
+        this.userInfo.avatar = this.$store.getters.avatar
+        this.isLogin = true
+      })
     }
   },
   methods: {
@@ -69,6 +90,12 @@ export default {
         return path
       }
       return null
+    },
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      this.isLogin = false
+      this.$router.push('/')
+      // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }

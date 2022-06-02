@@ -12,3 +12,15 @@ export function editTopic(data) {
     data:data
   })
 }
+
+export function getTopicList(data) {
+  return request({
+    url: '/bbs/topic/page',
+    method: 'post',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    data:data
+  })
+}

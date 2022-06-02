@@ -140,7 +140,6 @@ export default {
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               console.log('已经调用登录成功，并且设置token成功')
-              // this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.$router.push('/')
               this.loading = false
             })

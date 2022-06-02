@@ -464,3 +464,73 @@ aside {
     box-shadow: 0 0px 3px 0 rgb(0 0 0 / 2%), 0 4px 8px 0 rgb(0 0 0 / 2%);
   }
 }
+
+.topic-box {
+  background: #fff;
+  padding: 0px 15px 0px 15px;
+  box-shadow: 0 0px 3px 0 rgb(0 0 0 / 2%), 0 4px 8px 0 rgb(0 0 0 / 2%);
+  .topicList {
+    margin-bottom: 10px;
+    .topicItem {
+      margin: 0;
+      border-bottom: 1px solid #F2F3F5;
+      padding: 15px 0 10px 0;
+      position: relative;
+      .content {
+        margin-left: 88px;
+        margin-right: 100px;
+        .info {
+          margin-top: 2px;
+          margin-bottom: 8px;
+          color: #C9CDD4;
+          padding-left: 0;
+          list-style: none;
+          font-size: 0;
+          .tag-container {
+            margin-left: -5px;
+          }
+          .postTime {
+            margin-left: 10px;
+            font-size: 14px;
+          }
+        }
+        .title {
+          margin: 0 5px 0 0;
+          font-size: 0;
+          a {
+            color: #272E3B;
+            font-size: 18px;
+            line-height: 32px;
+          }
+        }
+        .detail {
+          position: relative;
+        }
+      }
+      .statistic {
+        position: absolute;
+        top: 17px;
+        right: 0px;
+        font-size: 14px;
+        color: #C9CDD4;
+        .viewTotal {
+          float: left;
+          margin-right: 4px;
+          min-width: 60px;
+          .icon {
+            margin-left: 3px;
+            position: relative;
+            top: 1px;
+            color: #E5E6EB;
+          }
+        }
+        .commentTotal {
+          float: right;
+          margin-right: 10px;
+          min-width: 50px;
+        }
+      }
+    }
+  }
+
+}
