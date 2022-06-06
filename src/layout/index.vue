@@ -75,12 +75,14 @@ export default {
     }
   },
   created() {
-    if( this.$store.getters.token !== ''){
+    if( this.$store.getters.token !== undefined ){
       this.$store.dispatch('user/getInfo').then(() => {
         console.log('获取用户信息成功')
         this.userInfo.avatar = this.$store.getters.avatar
         this.isLogin = true
       })
+    } else {
+      console.log('尚未登录')
     }
   },
   methods: {

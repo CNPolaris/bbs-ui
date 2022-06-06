@@ -77,6 +77,13 @@ export const constantRoutes = [
         meta: {
           title: '登录'
         }
+      },
+      {
+        path: '/topic/detail',
+        component: () => import('@/views/topic/index'),
+        meta: {
+          title: '详情'
+        }
       }
     ]
   }

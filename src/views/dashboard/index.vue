@@ -12,6 +12,11 @@
       <div class="topic-box">
         <div class="topicList">
           <div v-for="item in list" :key="item.id" class="topicItem">
+            <div class="avatarBox">
+              <a class="avatarLink">
+                <img :src="item.avatar" alt="头像">
+              </a>
+            </div>
             <div class="content clearfix">
               <ul class="info">
                 <li>
@@ -20,16 +25,27 @@
                 </li>
               </ul>
               <h2 class="title clearfix">
-                <a target="_blank">{{ item.title }}</a>
+                <a :href="'/#/topic/detail?id='+item.id">{{ item.title }}</a>
               </h2>
+              <div class="clearfix"></div>
+              <div class="detail">
+                <h2 class="summary" v-html="item.content">
+<!--                  {{ item.content }}-->
+
+                </h2>
+              </div>
             </div>
             <div class="statistic clearfix">
               <div class="viewTotal">
-                <i class="icon"></i>
+                <i class="icon">
+                  <img src="@/assets/eye.png" style="height: 14px; width: 14px">
+                </i>
                 {{ item.readCount }}
               </div>
               <div class="commentTotal">
-                <i class="icon"></i>
+                <i class="icon">
+                  <img src="@/assets/message.png" style="height: 14px; width: 14px">
+                </i>
                 {{ item.replyCount }}
               </div>
             </div>
@@ -45,7 +61,8 @@
             <el-input placeholder="请输入标题" v-model="form.title"/>
           </el-form-item>
           <el-form-item>
-            <markdown-editor v-model="form.content" />
+<!--            <markdown-editor v-model="form.content" />-->
+            <tinymce v-model="form.content"/>
           </el-form-item>
           <el-form-item>
             <el-button @click="handleEdit">发表</el-button>
@@ -60,12 +77,13 @@
 <script>
 import Pagination from '@/components/Pagination'
 import MarkdownEditor from '@/components/MarkdownEditor'
+import Tinymce from '@/components/Tinymce'
 import { editTopic, getTopicList } from '@/api/topic'
 import { formatDate } from "@/utils"
 
 export default {
   name: 'Dashboard',
-  components: { Pagination, MarkdownEditor },
+  components: { Pagination, MarkdownEditor, Tinymce },
   filters: {
     formatDateTime(time) {
       if (time == null || time === '') {

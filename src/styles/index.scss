@@ -476,6 +476,33 @@ aside {
       border-bottom: 1px solid #F2F3F5;
       padding: 15px 0 10px 0;
       position: relative;
+      .avatarBox {
+        position: relative;
+        margin-left: 0;
+        padding: 0;
+        float: left;
+        a {
+          outline: none;
+          text-decoration: none;
+          color: #A9AEB8;
+        }
+        .avatarLink {
+          display: block;
+          position: relative;
+          float: left;
+          padding-left: 4px;
+          img {
+            float: none;
+            display: block;
+            width: 62px;
+            height: 62px;
+            float: left;
+            margin-right: 10px;
+            border-radius: 62px;
+            position: relative;
+          }
+        }
+      }
       .content {
         margin-left: 88px;
         margin-right: 100px;
@@ -505,6 +532,14 @@ aside {
         }
         .detail {
           position: relative;
+          .summary {
+            margin: 0 50px 0 0;
+            font-size: 15px;
+            line-height: 28px;
+            font-weight: normal;
+            text-decoration: none;
+            color: #86909C;
+          }
         }
       }
       .statistic {
@@ -528,9 +563,131 @@ aside {
           float: right;
           margin-right: 10px;
           min-width: 50px;
+          .icon {
+            margin-left: 3px;
+            position: relative;
+            top: 1px;
+            color: #E5E6EB;
+          }
         }
       }
     }
   }
 
+}
+
+.topicContentModule {
+  margin: 50px auto auto auto;
+  .left{
+    float: left;
+    width: 900px;
+    height: auto;
+    .topic-wrap {
+      background: #fff;
+      box-shadow: 0 0px 3px 0 rgb(0 0 0 / 2%), 0 4px 8px 0 rgb(0 0 0 / 2%);
+      position: relative;
+      .topicTag {
+        padding-top: 15px;
+        margin-left: 15px;
+        .tag {
+          display: inline-block;
+          font-size: 14px;
+          line-height: 14px;
+          padding: 6px 8px 6px 8px;
+          margin-right: 5px;
+          border-radius: 3px;
+          color: #4E5969;
+          background-color: #f2f3f5;
+          position: relative;
+        }
+      }
+      .topicBox {
+        height: auto;
+        padding: 15px 15px 15px 15px;
+        .title {
+          color: #1D2129;
+          font-size: 24px;
+          border: none;
+          line-height: 34px;
+          margin: 9px 0 18px 0;
+        }
+        .topicInfo {
+          color: #A9AEB8;
+          font-size: 14px;
+          .viewTotal-icon {
+            float: left;
+            margin-left: 20px;
+            margin-top: 4px;
+          }
+          .viewTotal {
+            float: left;
+            margin-left: 3px;
+          }
+          .comment-icon {
+            float: left;
+            margin-left: 20px;
+            margin-top: 4px;
+          }
+          .comment {
+            float: left;
+            margin-left: 3px;
+          }
+        }
+        .topicContent {
+          border-top: 1px solid #F2F3F5;
+          margin-top: 5px;
+          padding: 20px 0px;
+          color: #272E3B;
+          font-size: 16px;
+          line-height: 1.75;
+          word-wrap: break-word;
+          min-height: 100px;
+        }
+      }
+    }
+    .commentModule {
+      margin-top: 10px;
+      padding: 0px 10px 50px 10px;
+      position: relative;
+      padding-bottom: 0;
+      background: #fff;
+      box-shadow: 0 0px 3px 0 rgb(0 0 0 / 2%), 0 4px 8px 0 rgb(0 0 0 / 2%);
+      .commentList {
+        list-style: none;
+        font-size: 15px;
+        .commentInfo {
+          padding: 15px 0 5px 77px;
+          border-bottom: 1px solid #F2F3F5;
+          .comment-author {
+            position: relative;
+            color: #86909C;
+            .info-container {
+              font-style: normal;
+              font-size: 0;
+            }
+          }
+          .commentTime {
+            margin-top: 3px;
+            margin-bottom: 5px;
+            color: #A9AEB8;
+            font-size: 13px;
+          }
+        }
+        .replyList {
+          padding: 10px 0 0px;
+          margin-left: 36px;
+          margin-right: 10px;
+          position: relative;
+          line-height: 22px;
+          margin-top: 20px;
+          background: #F7F8FA;
+          ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+          }
+        }
+      }
+    }
+  }
 }

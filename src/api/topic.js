@@ -24,3 +24,10 @@ export function getTopicList(data) {
     data:data
   })
 }
+
+export function selectTopic(id) {
+  return request({
+    url: '/bbs/topic/select/' + id,
+    method: 'get'
+  })
+}
