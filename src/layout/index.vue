@@ -9,13 +9,13 @@
           <el-menu-item index="/">
             首页
           </el-menu-item>
-          <el-menu-item>
+          <el-menu-item index="/question">
             问答
           </el-menu-item>
-          <el-menu-item>
+          <el-menu-item index="/tutor">
             导师推荐
           </el-menu-item>
-          <el-menu-item>
+          <el-menu-item index="/help">
             帮助中心
           </el-menu-item>
         </el-menu>
@@ -34,6 +34,8 @@
           <el-dropdown trigger="click" placement="bottom">
             <el-avatar class="el-dropdown-avatar" size="medium" :src="userInfo.avatar === null ? require('@/assets/avatar.png') : userInfo.avatar" />
             <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item divided>个人中心</el-dropdown-item>
+              <el-dropdown-item divided>我的话题</el-dropdown-item>
               <el-dropdown-item divided @click.native="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -44,11 +46,10 @@
       <router-view />
     </el-main>
     <el-footer height="340" class="app-footer">
-      <div class="foot-container">
-      </div>
+      <div class="foot-container" />
     </el-footer>
     <div class="foot-copyright">
-      <span target="_blank" ref="#">联系我们</span>
+      <span ref="#" target="_blank">联系我们</span>
     </div>
   </el-container>
 </template>
@@ -75,7 +76,7 @@ export default {
     }
   },
   created() {
-    if( this.$store.getters.token !== undefined ){
+    if (this.$store.getters.token !== undefined) {
       this.$store.dispatch('user/getInfo').then(() => {
         console.log('获取用户信息成功')
         this.userInfo.avatar = this.$store.getters.avatar
@@ -121,7 +122,7 @@ export default {
   }
 
   .drawer-bg {
-    background: #000;
+    background: #f4f5f7;
     opacity: 0.3;
     width: 100%;
     top: 0;

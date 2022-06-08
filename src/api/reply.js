@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import { getToken } from '@/utils/auth'
 
-export function createComment(data){
+export function createComment(data) {
   return request({
     url: '/bbs/reply/comment',
     method: 'post',
@@ -9,7 +9,7 @@ export function createComment(data){
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
     },
-    data:data
+    data: data
   })
 }
 

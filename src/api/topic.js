@@ -9,7 +9,7 @@ export function editTopic(data) {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
     },
-    data:data
+    data: data
   })
 }
 
@@ -21,7 +21,7 @@ export function getTopicList(data) {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
     },
-    data:data
+    data: data
   })
 }
 

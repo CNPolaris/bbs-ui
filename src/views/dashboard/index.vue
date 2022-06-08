@@ -20,19 +20,20 @@
             <div class="content clearfix">
               <ul class="info">
                 <li>
-                  <span class="tag-container">{{ item.sectionId }}</span>
+                  <span class="tag-container">
+                    <span class="tag">
+                      {{ item.section }}
+                    </span>
+                  </span>
                   <span class="postTime">发表时间：{{ item.createTime|formatDateTime }}</span>
                 </li>
               </ul>
               <h2 class="title clearfix">
                 <a :href="'/#/topic/detail?id='+item.id">{{ item.title }}</a>
               </h2>
-              <div class="clearfix"></div>
+              <div class="clearfix" />
               <div class="detail">
-                <h2 class="summary" v-html="item.content">
-<!--                  {{ item.content }}-->
-
-                </h2>
+                <h2 class="summary" v-html="item.content" />
               </div>
             </div>
             <div class="statistic clearfix">
@@ -52,17 +53,16 @@
           </div>
         </div>
       </div>
-      <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: right" @pagination="getList" />
+      <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: right;padding-top: 5px; padding-bottom: 5px; margin-top: 10px" @pagination="getList" />
     </div>
     <div class="topic-formModule">
       <div class="addTopic-wrap">
         <el-form v-model="form">
           <el-form-item>
-            <el-input placeholder="请输入标题" v-model="form.title"/>
+            <el-input v-model="form.title" placeholder="请输入标题" />
           </el-form-item>
           <el-form-item>
-<!--            <markdown-editor v-model="form.content" />-->
-            <tinymce v-model="form.content"/>
+            <tinymce v-model="form.content" />
           </el-form-item>
           <el-form-item>
             <el-button @click="handleEdit">发表</el-button>
@@ -76,14 +76,13 @@
 
 <script>
 import Pagination from '@/components/Pagination'
-import MarkdownEditor from '@/components/MarkdownEditor'
 import Tinymce from '@/components/Tinymce'
 import { editTopic, getTopicList } from '@/api/topic'
 import { formatDate } from '@/utils'
 
 export default {
   name: 'Dashboard',
-  components: { Pagination, MarkdownEditor, Tinymce },
+  components: { Pagination, Tinymce },
   filters: {
     formatDateTime(time) {
       if (time == null || time === '') {
@@ -91,7 +90,7 @@ export default {
       }
       const date = new Date(time)
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
-    },
+    }
   },
   data() {
     return {
@@ -110,7 +109,6 @@ export default {
     }
   },
   created() {
-    const _this = this
     this.getList()
   },
   methods: {
@@ -131,7 +129,7 @@ export default {
 <style lang="scss" scoped>
   .tabModule {
     margin-top: 50px;
-    padding: 8px 18px 8px 18px;
+    padding: 4px 18px 4px 18px;
     font-size: 14px;
     line-height: 300%;
     text-align: left;
@@ -164,9 +162,7 @@ export default {
     background-color: #f2f3f5;
     position: relative;
   }
-  .topicModule {
-    margin-top: 10px;
-  }
+
   .topic-formModule {
     margin-top: 10px;
     .addTopic-wrap {
