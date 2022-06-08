@@ -79,7 +79,7 @@ import Pagination from '@/components/Pagination'
 import MarkdownEditor from '@/components/MarkdownEditor'
 import Tinymce from '@/components/Tinymce'
 import { editTopic, getTopicList } from '@/api/topic'
-import { formatDate } from "@/utils"
+import { formatDate } from '@/utils'
 
 export default {
   name: 'Dashboard',
