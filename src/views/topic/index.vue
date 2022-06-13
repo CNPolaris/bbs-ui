@@ -77,6 +77,11 @@
                     回复
                   </i>
                 </a>
+                <a>
+                  <i :hidden="item.total < 3" @click="handleMoreComment(item)">
+                    更多评论
+                  </i>
+                </a>
               </span>
             </div>
           </div>
@@ -102,7 +107,7 @@
 
 <script>
 import { selectTopic } from '@/api/topic'
-import { createComment, selectCommentList } from '@/api/reply'
+import { createComment, selectCommentList, selectMoreComment } from '@/api/reply'
 import Tinymce from '@/components/Tinymce'
 import { formatDate } from '@/utils'
 import Pagination from '@/components/Pagination'
@@ -142,6 +147,7 @@ export default {
         page: 1,
         limit: 5,
         topicId: null,
+        parentCommentId: null,
         twoPage: 1,
         twoLimit: 3
       },
@@ -189,8 +195,38 @@ export default {
             type: 'success',
             duration: 2000
           })
+          const id = this.$route.query.id
+          const _this = this
+          _this.commentPage.topicId = parseInt(id)
+          selectCommentList(_this.commentPage).then(re => {
+            _this.oneCommentList = re.data.list
+            _this.oneCommentTotal = re.data.total
+          })
         }
       })
+    },
+    handleMoreComment(item) {
+      const id = this.$route.query.id
+      const _this = this
+      _this.commentPage.topicId = parseInt(id)
+      _this.commentPage.twoPage++
+      _this.commentPage.parentCommentId = item.comment.id
+      selectMoreComment(_this.commentPage).then(re => {
+        if (re.code === 2000) {
+          const reply = re.data
+          for (let i = 0; i < reply.length; i++) {
+            item.replyList.push(reply[i])
+          }
+        } else {
+          this.$notify({
+            title: '没了',
+            message: re.message,
+            type: 'error',
+            duration: 2000
+          })
+        }
+      })
+      return item
     },
     submitForm() {
       if (this.commentForm.content === null) {

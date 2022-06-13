@@ -20,3 +20,11 @@ export function selectCommentList(query) {
     data: query
   })
 }
+
+export function selectMoreComment(query) {
+  return request({
+    url: '/bbs/reply/comment/more',
+    method: 'post',
+    data: query
+  })
+}
