@@ -55,7 +55,7 @@
       </div>
       <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: right;padding-top: 5px; padding-bottom: 5px; margin-top: 10px" @pagination="getList" />
     </div>
-    <div class="topic-formModule">
+    <div class="topic-formModule" :hidden="this.$store.getters.token === null">
       <div class="addTopic-wrap">
         <el-form v-model="form">
           <el-form-item>
@@ -119,8 +119,21 @@ export default {
       })
     },
     handleEdit() {
+      if (this.form.sectionId === null || this.form.title === null || this.form.content === null) {
+        this.$notify({
+          title: '失败',
+          message: '话题内容不能为空',
+          type: 'error',
+          duration: 2000
+        })
+      }
       editTopic(this.form).then(re => {
-        console.log(re.data)
+        this.$notify({
+          title: '成功',
+          message: '发布成功',
+          type: 'success',
+          duration: 2000
+        })
       })
     }
   }

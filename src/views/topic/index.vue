@@ -96,7 +96,7 @@
         </div>
       </el-dialog>
       <div class="comment-formModule">
-        <div class="addComment-wrap">
+        <div class="addComment-wrap" :hidden="this.$store.getters.token === null">
           <tinymce v-model="comment.content" />
           <el-button type="primary" @click="handleComment">评论</el-button>
         </div>
@@ -186,24 +186,33 @@ export default {
       this.commentForm.title = item.title
     },
     handleComment() {
-      createComment(this.comment).then(re => {
-        Object.assign({}, this.comment)
-        if (re.code === 2000) {
-          this.$notify({
-            title: '成功',
-            message: '评论成功',
-            type: 'success',
-            duration: 2000
-          })
-          const id = this.$route.query.id
-          const _this = this
-          _this.commentPage.topicId = parseInt(id)
-          selectCommentList(_this.commentPage).then(re => {
-            _this.oneCommentList = re.data.list
-            _this.oneCommentTotal = re.data.total
-          })
-        }
-      })
+      if (this.comment.content === null) {
+        this.$notify({
+          title: '失败',
+          message: '评论内容不能为空',
+          type: 'error',
+          duration: 2000
+        })
+      } else {
+        createComment(this.comment).then(re => {
+          Object.assign({}, this.comment)
+          if (re.code === 2000) {
+            this.$notify({
+              title: '成功',
+              message: '评论成功',
+              type: 'success',
+              duration: 2000
+            })
+            const id = this.$route.query.id
+            const _this = this
+            _this.commentPage.topicId = parseInt(id)
+            selectCommentList(_this.commentPage).then(re => {
+              _this.oneCommentList = re.data.list
+              _this.oneCommentTotal = re.data.total
+            })
+          }
+        })
+      }
     },
     handleMoreComment(item) {
       const id = this.$route.query.id
