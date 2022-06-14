@@ -18,7 +18,6 @@ export function getTopicList(data) {
     url: '/bbs/topic/page',
     method: 'post',
     headers: {
-      'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
     },
     data: data
