@@ -4,7 +4,9 @@
       <div class="tab-box">
         <div style="max-height: none;">
           <a class="tab-current">全部</a>
-          <a class="tab">导师</a>
+          <a v-for="item in sections" :key="item.id" class="tab" @click="handleSearch(item.id)">
+            {{ item.name }}
+          </a>
         </div>
       </div>
     </div>
@@ -79,7 +81,7 @@ import Pagination from '@/components/Pagination'
 import Tinymce from '@/components/Tinymce'
 import { editTopic, getTopicList } from '@/api/topic'
 import { formatDate } from '@/utils'
-
+const { mapActions, mapGetters, mapState } = require('vuex')
 export default {
   name: 'Dashboard',
   components: { Pagination, Tinymce },
@@ -108,8 +110,13 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters('section', ['sectionEnumFormat']),
+    ...mapState('section', { sections: state => state.sections })
+  },
   created() {
     this.getList()
+    this.initSection()
   },
   methods: {
     getList() {
@@ -135,7 +142,12 @@ export default {
           duration: 2000
         })
       })
-    }
+    },
+    handleSearch(section) {
+      this.queryParam.sectionId = section
+      this.getList()
+    },
+    ...mapActions('section', { initSection: 'initSection' })
   }
 }
 </script>
