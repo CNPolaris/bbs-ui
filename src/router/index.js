@@ -85,6 +85,27 @@ export const constantRoutes = [
         meta: {
           title: '详情'
         }
+      },
+      {
+        path: '/question/index',
+        component: () => import('@/views/question/index'),
+        meta: {
+          title: '问答'
+        }
+      },
+      {
+        path: '/question/edit',
+        component: () => import('@/views/question/edit'),
+        meta: {
+          title: '问答编辑'
+        }
+      },
+      {
+        path: '/question/detail',
+        component: () => import('@/views/question/detail'),
+        meta: {
+          title: '问答详情'
+        }
       }
     ]
   }

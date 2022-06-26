@@ -41,7 +41,7 @@
             <div class="statistic clearfix">
               <div class="viewTotal">
                 <i class="icon">
-                  <img src="@/assets/eye.png" style="height: 14px; width: 14px">
+                  <img src="@/assets/eye.png" style="height: 14px; width: 14px" alt="头像">
                 </i>
                 {{ item.readCount }}
               </div>
@@ -70,7 +70,6 @@
             <el-button @click="handleEdit">发表</el-button>
           </el-form-item>
         </el-form>
-
       </div>
     </div>
   </div>

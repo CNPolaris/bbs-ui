@@ -9,7 +9,7 @@
           <el-menu-item index="/">
             首页
           </el-menu-item>
-          <el-menu-item index="/question">
+          <el-menu-item index="/question/index">
             问答
           </el-menu-item>
           <el-menu-item index="/tutor">
@@ -187,10 +187,9 @@ export default {
     }
     .copyright {
       width: 990px;
-      margin: 0 auto;
       color: #86909C;
       text-align: center;
-      margin-top: 18px;
+      margin: 18px auto 0;
     }
   }
 </style>
